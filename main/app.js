@@ -3,24 +3,24 @@ function addTokens(input, tokens){
     {
         if(input.length >= 6)
         {
-            for(var token in tokens) 
+            var format = true;
+            tokens.forEach(item => typeof(item['tokenName']) !== 'string' ? format = false : null);
+
+            if(tokens != Array.isArray() && format == false)
             {
-                if(typeof token.tokenName === String)
+                throw new Error("Invalid array format");
+            }
+            else
+            {
+                if(input.includes('...'))
                 {
-                    if(input.includes("..."))
-                    {
-                        return input.replace('...', "${" + tokens[0].tokenName + "}");
-                    }
-                    else
-                    {
-                        return input;
-                    }
+                    return input.replace('...', "${"+ tokens[0].tokenName +"}");
                 }
                 else
                 {
-                    throw new Error("Invalid array format");
+                    return input;
                 }
-            }           
+            }
         }
         else
         {
