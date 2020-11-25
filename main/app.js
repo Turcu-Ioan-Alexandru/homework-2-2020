@@ -9,7 +9,7 @@ function addTokens(input, tokens){
                 {
                     if(input.includes("..."))
                     {
-
+                        return input.replace('...', "${" + tokens[0].tokenName + "}");
                     }
                     else
                     {
